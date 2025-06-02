@@ -15,10 +15,7 @@ def get_db_engine():
     # 환경 변수 'DB_URI'에서 DB 연결 문자열을 가져옵니다.
     # 환경 변수가 설정되지 않았을 경우를 대비하여 기본값(하드코딩된 값)을 제공합니다.
     # 이 기본값은 개발 환경에서만 사용하고, 프로덕션에서는 환경 변수를 통해 주입되어야 합니다.
-    db_uri = os.getenv(
-        'DB_URI',
-        'mysql+pymysql://root:dugout2025!!@dugout-dev.cn6mm486utfi.ap-northeast-2.rds.amazonaws.com:3306/dugoutDB?charset=utf8'
-    )
+    db_uri = os.environ.get("DB_URI")
 
     # 디버깅을 위해 DB URI 사용 여부를 출력합니다.
     # 보안을 위해 비밀번호는 출력하지 않도록 마스킹 처리합니다.
