@@ -9,12 +9,16 @@ import time
 # 배포할 때 쓰라신다
 def get_driver():
     options = Options()
-    options.add_argument("--headless")  
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.binary_location = "/usr/bin/chromium"
-    chrome_service = Service("/usr/lib/chromium/chromedriver")
-    return webdriver.Chrome(service=chrome_service, options=options)
+    options.add_argument('--headless')  # GUI 없는 환경
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+
+    chrome_path = '/usr/bin/chromium'
+    chromedriver_path = '/usr/lib/chromium/chromedriver'
+
+    service = Service(executable_path=chromedriver_path)
+
+    return webdriver.Chrome(service=service, options=options)
 
 def get_inning_log(game_id: str, inning_index: int) -> list[list, int, int]:
     # 크롬열기
