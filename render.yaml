@@ -1,7 +1,9 @@
 services:
   - type: web
-    name: flask-api
-    env: python
+    name: baseball-inning-predictor
+    env: docker
     plan: free
-    buildCommand: ""
-    startCommand: "python app.py"
+    autoDeploy: true
+    envVars:
+      - key: DB_URI
+        sync: false  # Render 웹 대시보드에서 따로 입력
