@@ -9,7 +9,7 @@ import time
 # 배포할 때 쓰라신다
 def get_driver():
     options = Options()
-    options.add_argument("--headless=new")  # 최신 버전용 headless
+    options.add_argument("--headless")  
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.binary_location = "/usr/bin/chromium"
