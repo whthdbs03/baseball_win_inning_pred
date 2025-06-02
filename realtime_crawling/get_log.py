@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
 import time
 
 # 배포할 때 쓰라신다
@@ -11,7 +12,8 @@ def get_driver():
     options.add_argument("--headless=new")  # 최신 버전용 headless
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    return webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
+    chrome_service = Service('/usr/bin/chromedriver')
+    return webdriver.Chrome(service=chrome_service, options=options)
 
 def get_inning_log(game_id: str, inning_index: int) -> list[list, int, int]:
     # 크롬열기
