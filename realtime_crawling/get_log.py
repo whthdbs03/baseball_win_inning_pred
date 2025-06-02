@@ -12,6 +12,7 @@ def get_driver():
     options.add_argument("--headless=new")  # 최신 버전용 headless
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.binary_location = "/usr/bin/chromium"
     chrome_service = Service('/usr/bin/chromedriver')
     return webdriver.Chrome(service=chrome_service, options=options)
 
