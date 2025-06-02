@@ -13,7 +13,7 @@ def get_driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.binary_location = "/usr/bin/chromium"
-    chrome_service = Service('/usr/bin/chromedriver')
+    chrome_service = Service("/usr/lib/chromium/chromedriver")
     return webdriver.Chrome(service=chrome_service, options=options)
 
 def get_inning_log(game_id: str, inning_index: int) -> list[list, int, int]:
