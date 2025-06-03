@@ -5,6 +5,11 @@ from datetime import datetime, timedelta
 from kbo_scraper import get_today_games
 from db_utils import get_win_probability
 from inning_scheduler import start_scheduler
+import request
+import os
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 app = Flask(__name__)
 scheduler = BackgroundScheduler()
@@ -55,8 +60,9 @@ def register_today_games():
     for game in games:
         launch_scheduler_for_game(game['game_id'], game['start_time'])
 
-# 🕓 매일 새벽 3시 예약
-scheduler.add_job(register_today_games, trigger='cron', hour=3, minute=0)
+# 매일 새벽 3시 예약
+# scheduler.add_job(register_today_games, trigger='cron', hour=3, minute=0)
+# 렌더는 깨어있지 않대. free 플랜을 쓴다고
 
 @app.route('/health')
 def health():
@@ -64,9 +70,12 @@ def health():
 
 @app.route('/force_register', methods=['GET'])
 def force_register():
+    token = request.args.get("token")
+    secret_token = os.getenv("REGISTER_SECRET_TOKEN")
+    if token != secret_token:
+        return "Unauthorized", 403
     register_today_games()
-    return "강제 경기 등록 하셨어요(테스트 또는 수동)"
-
+    return "강제 경기 등록 완료" # 이 라우터를 깃액션으로 호출하자
 
 @app.route('/')
 def home():
@@ -80,6 +89,5 @@ if __name__ == '__main__':
     # serve(app, host='0.0.0.0', port=8080)
     # register_today_games() # 크론 잡으로 app.py 을 3시마다 실행시키자 그냥 
     # 크론 잡 유료임 미친 것
-    import os
     port = int(os.environ.get("PORT", 10000)) 
     app.run(host="0.0.0.0", port=port)
