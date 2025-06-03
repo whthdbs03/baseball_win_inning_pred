@@ -76,8 +76,10 @@ def inference(inning, game_id, home_win_pred):
     print(f"현재 시점 예측 → 확률: {prob:.4f}, 예측: {'승리' if pred == 1 else '패배'}")
     
     save_live_win_prediction(game_id=game_id, inning=inning, win_prob=pred, 
-                             home_accum_score=realtimedf['home_score'], 
-                             away_accum_score=realtimedf['away_score'])
+                             home_accum_score=realtimedf['home_score'].iloc[-1],
+                             away_accum_score=realtimedf['away_score'].iloc[-1])
+    print(f"🏠 홈 최종 점수: {realtimedf['home_score'].iloc[-1]}")
+    print(f"🧳 어웨이 최종 점수: {realtimedf['away_score'].iloc[-1]}")
 
 
 def main():
