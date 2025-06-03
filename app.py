@@ -78,6 +78,7 @@ def home():
 if __name__ == '__main__':
     # from waitress import serve
     # serve(app, host='0.0.0.0', port=8080)
+    register_today_games() # 크론 잡으로 app.py 을 3시마다 실행시키자 그냥 
     import os
     port = int(os.environ.get("PORT", 10000)) 
     app.run(host="0.0.0.0", port=port)
