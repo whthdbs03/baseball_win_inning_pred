@@ -70,7 +70,7 @@ def force_register():
 
 @app.route('/')
 def home():
-    return 'Hello, world!'
+    return "KBO 경기 중 승률 예측 API입니다. /force_register (GET) : 수동 스케줄러 호출을 원하시면 사용하세요."
 
 # if __name__ == '__main__':
 #     app.run(port=8080)
@@ -78,7 +78,8 @@ def home():
 if __name__ == '__main__':
     # from waitress import serve
     # serve(app, host='0.0.0.0', port=8080)
-    register_today_games() # 크론 잡으로 app.py 을 3시마다 실행시키자 그냥 
+    # register_today_games() # 크론 잡으로 app.py 을 3시마다 실행시키자 그냥 
+    # 크론 잡 유료임 미친 것
     import os
     port = int(os.environ.get("PORT", 10000)) 
     app.run(host="0.0.0.0", port=port)
