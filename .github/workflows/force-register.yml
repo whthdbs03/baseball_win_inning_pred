@@ -11,9 +11,9 @@ jobs:
     steps:
       - name: Wake up Render server
         run: |
-          curl --silent --max-time 10 https://<YOUR_RENDER_DOMAIN>/ || true
+          curl --silent --max-time 10 https://baseball-win-inning-pred.onrender.com// || true
           sleep 10  # 서버 깨울 시간 10초 대기
 
       - name: Call /force_register endpoint
         run: |
-          curl --fail "https://<YOUR_RENDER_DOMAIN>/force_register?token=${{ secrets.REGISTER_TOKEN }}"
+          curl --fail "https://baseball-win-inning-pred.onrender.com//force_register?token=${{ secrets.REGISTER_TOKEN }}"
