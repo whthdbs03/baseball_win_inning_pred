@@ -68,9 +68,16 @@ def force_register():
     return "강제 경기 등록 하셨어요(테스트 또는 수동)"
 
 
+@app.route('/')
+def home():
+    return 'Hello, world!'
+
 # if __name__ == '__main__':
 #     app.run(port=8080)
     
 if __name__ == '__main__':
-    from waitress import serve
-    serve(app, host='0.0.0.0', port=8080)
+    # from waitress import serve
+    # serve(app, host='0.0.0.0', port=8080)
+    import os
+    port = int(os.environ.get("PORT", 10000)) 
+    app.run(host="0.0.0.0", port=port)
