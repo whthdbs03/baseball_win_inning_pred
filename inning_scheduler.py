@@ -33,6 +33,8 @@ def get_current_inning(game_id: str) -> int:
             inning_done = i
     except Exception as e:
         print(f"⚠️ 이닝 정보 파싱 중 오류: {e}")
+        driver.quit()
+        return None 
 
     driver.quit()
     return inning_done
@@ -48,6 +50,10 @@ def run_inference_if_inning_finished(game_id: str, home_win_pred: float):
     global prev_inning
     try:
         current_inning = get_current_inning(game_id)
+
+        if current_inning is None:
+            print("⚠️ 이닝 정보를 얻지 못함. 이전 값 유지.")
+            return
 
         if prev_inning is not None and current_inning > prev_inning:
             run_inference(prev_inning, game_id, home_win_pred)

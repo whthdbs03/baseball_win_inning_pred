@@ -58,12 +58,17 @@ def launch_scheduler_for_game(game_id, start_time):
 def register_today_games():
     today = datetime.now().date()
     games = get_today_games(today)  # [{'game_id': '20250603LGOB', 'start_time': datetime(...)}, ...]
-    
+    print(today)
+    print(games)
     for game in games:
         launch_scheduler_for_game(game['game_id'], game['start_time'])
-
+# register_today_games()
+'''
+2025-06-03
+[{'game_id': '20250603LGNC', 'start_time': datetime.datetime(2025, 6, 3, 14, 0)}, {'game_id': '20250603KTHH', 'start_time': datetime.datetime(2025, 6, 3, 14, 0)}, {'game_id': '20250603HTOB', 'start_time': datetime.datetime(2025, 6, 3, 17, 0)}, {'game_id': '20250603SSSK', 'start_time': datetime.datetime(2025, 6, 3, 17, 0)}, {'game_id': '20250603WOLT', 'start_time': datetime.datetime(2025, 6, 3, 17, 0)}]
+'''
 # 매일 새벽 3시 예약
-scheduler.add_job(register_today_games, trigger='cron', hour=3, minute=0)
+# scheduler.add_job(register_today_games, trigger='cron', hour=3, minute=0)
 # 렌더는 깨어있지 않대. free 플랜을 쓴다고
 
 @app.route('/health')
