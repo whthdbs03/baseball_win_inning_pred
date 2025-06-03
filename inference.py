@@ -44,8 +44,12 @@ class GRUWinPredictor(nn.Module):
         return self.sigmoid(self.fc(out))
     
 def setmodel():
-    torch.serialization.add_safe_globals({"GRUWinPredictor": GRUWinPredictor})
-    model = torch.load("model/gru_model_full.pt", weights_only=False)
+    # torch.serialization.add_safe_globals({"GRUWinPredictor": GRUWinPredictor})
+    # model = torch.load("model/gru_model_full.pt", weights_only=False)
+    # model.eval()
+    # return model
+    model = GRUWinPredictor(input_dim=19)  # 실제 구조대로
+    model.load_state_dict(torch.load("model/gru_model_full.pt"))
     model.eval()
     return model
 
@@ -58,7 +62,7 @@ def inference(inning, game_id, home_win_pred):
     # 0       1           2           0          -2          1        0  ...       0       1          0       0       0       0
     # 1       1           2           0          -2          0        0  ...       0       2          0       0       0       0
     # [2 rows x 19 columns]
-
+    print("df추출완")
     feature_cols = [
         'inning', 'away_score','home_score',  'score_diff', 'home_away', 
         'res_2루타','res_3루타','res_기타','res_땅볼아웃','res_뜬공아웃',
@@ -67,6 +71,7 @@ def inference(inning, game_id, home_win_pred):
     ]
 
     model = setmodel()
+    print("모델 세팅완")
     prob, pred = inference_prob(model, realtimedf, feature_cols, home_win_pred)
     print(f"현재 시점 예측 → 확률: {prob:.4f}, 예측: {'승리' if pred == 1 else '패배'}")
     

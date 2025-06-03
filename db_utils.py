@@ -89,3 +89,9 @@ def get_win_probability(team1: str, team2: str) -> float:
     except Exception as e:
         print(f"❌ 승률 조회 중 오류 발생: {e}")
         return None
+
+# print(get_win_probability('KIA','두산')*0.01) 0.6777
+# print(get_win_probability('삼성','SSG'))
+# print(get_win_probability('키움','롯데'))
+# print(get_win_probability('LG','NC'))
+# print(get_win_probability('KT','한화'))

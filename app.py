@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from kbo_scraper import get_today_games
 from db_utils import get_win_probability
 from inning_scheduler import start_scheduler
-import request
+import requests
 import os
 from dotenv import load_dotenv
 
@@ -41,7 +41,9 @@ def launch_scheduler_for_game(game_id, start_time):
         home_team = TEAM_CODE_MAP.get(home_code)
         if away_team and home_team: # 잘 들어왔을 경우 예측값 db에서 받아오기
             home_win_pred = get_win_probability(home_team, away_team) # 경기 전 예측 값 (team1 == home 일 때 받아오기)
-
+            print(home_win_pred)
+            home_win_pred = home_win_pred*0.01
+            print("db에서 겟 완")
         # subprocess.Popen([
         #     'python', 'inning_scheduler.py',
         #     '--game_id', game_id,
@@ -61,7 +63,7 @@ def register_today_games():
         launch_scheduler_for_game(game['game_id'], game['start_time'])
 
 # 매일 새벽 3시 예약
-# scheduler.add_job(register_today_games, trigger='cron', hour=3, minute=0)
+scheduler.add_job(register_today_games, trigger='cron', hour=3, minute=0)
 # 렌더는 깨어있지 않대. free 플랜을 쓴다고
 
 @app.route('/health')
@@ -70,7 +72,7 @@ def health():
 
 @app.route('/force_register', methods=['GET'])
 def force_register():
-    token = request.args.get("token")
+    token = requests.args.get("token") # s붙뗗뭐임
     secret_token = os.getenv("REGISTER_SECRET_TOKEN")
     if token != secret_token:
         return "Unauthorized", 403
