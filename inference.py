@@ -94,5 +94,5 @@ def main():
     
     inference(inning=args.inning, game_id=args.game_id, home_win_pred=args.home_win_pred)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

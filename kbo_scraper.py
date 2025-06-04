@@ -72,5 +72,5 @@ def get_today_games(today_date):
     driver.quit()
     return games
 
-games = get_today_games(date(2025, 6, 3))
-print(games)
+# games = get_today_games(date(2025, 6, 3))
+# print(games)

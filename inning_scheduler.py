@@ -79,10 +79,10 @@ def start_scheduler(game_id: str, home_win_pred: float):
 #     # GAME_ID = "20250531SSLG0"  
 #     GAME_ID = "20250601SSLG"
 #     start_scheduler(GAME_ID)
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--game_id', type=str, required=True)
-    parser.add_argument('--home_win_pred', type=float, required=True)
-    args = parser.parse_args()
+# if __name__ == '__main__':
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('--game_id', type=str, required=True)
+#     parser.add_argument('--home_win_pred', type=float, required=True)
+#     args = parser.parse_args()
 
-    start_scheduler(args.game_id, args.home_win_pred)
+#     start_scheduler(args.game_id, args.home_win_pred)
