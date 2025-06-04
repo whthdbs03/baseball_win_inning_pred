@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from kbo_scraper import get_today_games
 from db_utils import get_win_probability
 from inning_scheduler import start_scheduler
-import requests
+from flask import request
 import os
 from dotenv import load_dotenv
 
@@ -77,7 +77,7 @@ def health():
 
 @app.route('/force_register', methods=['GET'])
 def force_register():
-    token = requests.args.get("token") # s붙뗗뭐임
+    token = request.args.get("token")  
     secret_token = os.getenv("REGISTER_SECRET_TOKEN")
     if token != secret_token:
         return "Unauthorized", 403
