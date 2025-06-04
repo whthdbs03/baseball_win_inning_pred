@@ -8,6 +8,7 @@ from inning_scheduler import start_scheduler
 from flask import request
 import os
 from dotenv import load_dotenv
+import threading
 
 load_dotenv() 
 
@@ -83,7 +84,8 @@ def force_register():
     print(f"[DEBUG] 서버 저장 토큰: {secret_token}")
     if token != secret_token:
         return "Unauthorized", 403
-    register_today_games()
+    # register_today_games()
+    threading.Thread(target=register_today_games).start() 
     return "강제 경기 등록 완료" # 이 라우터를 깃액션으로 호출하자
 
 @app.route('/')
