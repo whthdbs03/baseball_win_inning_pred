@@ -79,6 +79,8 @@ def health():
 def force_register():
     token = request.args.get("token")  
     secret_token = os.getenv("REGISTER_SECRET_TOKEN")
+    print(f"[DEBUG] 요청 토큰: {token}")
+    print(f"[DEBUG] 서버 저장 토큰: {secret_token}")
     if token != secret_token:
         return "Unauthorized", 403
     register_today_games()
