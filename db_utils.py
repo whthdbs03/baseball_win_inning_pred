@@ -95,3 +95,26 @@ def get_win_probability(team1: str, team2: str) -> float:
 # print(get_win_probability('키움','롯데'))
 # print(get_win_probability('LG','NC'))
 # print(get_win_probability('KT','한화'))
+
+
+def delete_predictions_by_game_id(game_id: str):
+    try:
+        engine = get_db_engine()
+        with engine.connect() as conn:
+            conn.execute(text("DELETE FROM live_win_predictions WHERE game_id = :game_id"), {"game_id": game_id})
+            conn.commit()
+        print(f"🗑️ 삭제 완료: game_id={game_id}")
+    except Exception as e:
+        print(f"❌ 삭제 실패: {e}")
+
+def delete_all_predictions():
+    try:
+        engine = get_db_engine()
+        with engine.connect() as conn:
+            conn.execute(text("DELETE FROM live_win_predictions"))
+            conn.commit()
+        print("🗑️ 전체 예측 데이터 삭제 완료")
+    except Exception as e:
+        print(f"❌ 전체 삭제 실패: {e}")
+        
+# delete_all_predictions()

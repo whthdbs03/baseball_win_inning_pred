@@ -27,7 +27,7 @@ def inference_prob(model, game_df, feature_cols, home_win_pred):
         prob = model(x_tensor).item()
         pred = int(prob >= 0.5)
         # Sorry
-        pred = pred*0.7 + home_win_pred*0.3
+        prob = prob*0.5 + home_win_pred*0.3 + 0.1
 
     return prob, pred
 
@@ -73,9 +73,9 @@ def inference(inning, game_id, home_win_pred):
     model = setmodel()
     print("모델 세팅완")
     prob, pred = inference_prob(model, realtimedf, feature_cols, home_win_pred)
-    print(f"현재 시점 예측 → 확률: {prob:.4f}, 예측: {'승리' if pred == 1 else '패배'}")
+    print(f"현재 시점 예측 → 확률: {prob:.4f}, 예측: {'승리' if pred >=0.5 else '패배'}")
     
-    save_live_win_prediction(game_id=game_id, inning=inning, win_prob=pred, 
+    save_live_win_prediction(game_id=game_id, inning=inning, win_prob=prob, 
                              home_accum_score=realtimedf['home_score'].iloc[-1],
                              away_accum_score=realtimedf['away_score'].iloc[-1])
     print(f"🏠 홈 최종 점수: {realtimedf['home_score'].iloc[-1]}")
