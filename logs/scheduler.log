@@ -1,0 +1,47 @@
+2025-06-05 06:50:30,684 [INFO] Scheduler started
+2025-06-05 06:50:30,685 [INFO] 오늘 날짜: 2025-06-05
+2025-06-05 06:50:30,729 [INFO] 오늘 경기 목록: [{'game_id': '20250605HTOB', 'away': 'KIA', 'home': '두산', 'stadium': '잠실', 'start_time': '18:30', 'status': '정규경기'}, {'game_id': '20250605SSSK', 'away': '삼성', 'home': 'SSG', 'stadium': '문학', 'start_time': '18:30', 'status': '정규경기'}, {'game_id': '20250605WOLT', 'away': '키움', 'home': '롯데', 'stadium': '사직', 'start_time': '18:30', 'status': '정규경기'}, {'game_id': '20250605LGNC', 'away': 'LG', 'home': 'NC', 'stadium': '창원', 'start_time': '18:30', 'status': '정규경기'}, {'game_id': '20250605KTHH', 'away': 'KT', 'home': '한화', 'stadium': '대전(신)', 'start_time': '18:30', 'status': '정규경기'}]
+2025-06-05 06:50:30,729 [INFO] [20250605HTOB] 경기 시작 시간: 2025-06-05 18:30:00
+2025-06-05 06:50:30,731 [INFO] Added job "launch_scheduler_for_game.<locals>.run" to job store "default"
+2025-06-05 06:50:30,731 [INFO] ⏱️ [20250605HTOB] 스케줄 등록 완료 → 2025-06-05 18:30:00
+2025-06-05 06:50:30,731 [INFO] [20250605SSSK] 경기 시작 시간: 2025-06-05 18:30:00
+2025-06-05 06:50:30,731 [INFO] Added job "launch_scheduler_for_game.<locals>.run" to job store "default"
+2025-06-05 06:50:30,731 [INFO] ⏱️ [20250605SSSK] 스케줄 등록 완료 → 2025-06-05 18:30:00
+2025-06-05 06:50:30,731 [INFO] [20250605WOLT] 경기 시작 시간: 2025-06-05 18:30:00
+2025-06-05 06:50:30,732 [INFO] Added job "launch_scheduler_for_game.<locals>.run" to job store "default"
+2025-06-05 06:50:30,732 [INFO] ⏱️ [20250605WOLT] 스케줄 등록 완료 → 2025-06-05 18:30:00
+2025-06-05 06:50:30,732 [INFO] [20250605LGNC] 경기 시작 시간: 2025-06-05 18:30:00
+2025-06-05 06:50:30,732 [INFO] Added job "launch_scheduler_for_game.<locals>.run" to job store "default"
+2025-06-05 06:50:30,732 [INFO] ⏱️ [20250605LGNC] 스케줄 등록 완료 → 2025-06-05 18:30:00
+2025-06-05 06:50:30,732 [INFO] [20250605KTHH] 경기 시작 시간: 2025-06-05 18:30:00
+2025-06-05 06:50:30,732 [INFO] Added job "launch_scheduler_for_game.<locals>.run" to job store "default"
+2025-06-05 06:50:30,733 [INFO] ⏱️ [20250605KTHH] 스케줄 등록 완료 → 2025-06-05 18:30:00
+2025-06-05 06:50:32,018 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:10000
+ * Running on http://192.168.75.86:10000
+2025-06-05 06:50:32,019 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-05 18:30:00,006 [INFO] Running job "launch_scheduler_for_game.<locals>.run (trigger: date[2025-06-05 18:30:00 KST], next run at: 2025-06-05 18:30:00 KST)" (scheduled at 2025-06-05 18:30:00+09:00)
+2025-06-05 18:30:00,008 [INFO] Removed job 18a82f42db11493b881b96dd51198814
+2025-06-05 18:30:00,009 [INFO] 🚀 [20250605WOLT] 스케줄 실행됨
+2025-06-05 18:30:00,012 [INFO] Running job "launch_scheduler_for_game.<locals>.run (trigger: date[2025-06-05 18:30:00 KST], next run at: 2025-06-05 18:30:00 KST)" (scheduled at 2025-06-05 18:30:00+09:00)
+2025-06-05 18:30:00,012 [INFO] Removed job 487d8341e93c4c43adc28b6e889c1cf8
+2025-06-05 18:30:00,013 [INFO] 🚀 [20250605KTHH] 스케줄 실행됨
+2025-06-05 18:30:00,015 [INFO] Running job "launch_scheduler_for_game.<locals>.run (trigger: date[2025-06-05 18:30:00 KST], next run at: 2025-06-05 18:30:00 KST)" (scheduled at 2025-06-05 18:30:00+09:00)
+2025-06-05 18:30:00,016 [INFO] Removed job ad023c83175b4d35a4315298a04a99f4
+2025-06-05 18:30:00,016 [INFO] 🚀 [20250605SSSK] 스케줄 실행됨
+2025-06-05 18:30:00,016 [INFO] Running job "launch_scheduler_for_game.<locals>.run (trigger: date[2025-06-05 18:30:00 KST], next run at: 2025-06-05 18:30:00 KST)" (scheduled at 2025-06-05 18:30:00+09:00)
+2025-06-05 18:30:00,016 [INFO] Removed job bc34a6231935481d92450a4e929d709f
+2025-06-05 18:30:00,017 [INFO] 🚀 [20250605HTOB] 스케줄 실행됨
+2025-06-05 18:30:00,018 [INFO] Running job "launch_scheduler_for_game.<locals>.run (trigger: date[2025-06-05 18:30:00 KST], next run at: 2025-06-05 18:30:00 KST)" (scheduled at 2025-06-05 18:30:00+09:00)
+2025-06-05 18:30:00,018 [INFO] Removed job d08a6de8619844a89ca6a22561ae5a69
+2025-06-05 18:30:00,019 [INFO] 🚀 [20250605LGNC] 스케줄 실행됨
+2025-06-05 18:30:00,533 [INFO] 🏠 홈팀 승률 예측값: 0.6772
+2025-06-05 18:30:00,535 [INFO] 🏠 홈팀 승률 예측값: 0.7572
+2025-06-05 18:30:00,535 [INFO] 🏠 홈팀 승률 예측값: 0.3481
+2025-06-05 18:30:00,536 [INFO] 🏠 홈팀 승률 예측값: 0.3073
+2025-06-05 18:30:00,883 [INFO] 🏠 홈팀 승률 예측값: 0.3678
+2025-06-05 22:56:47,838 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000274EC7ADE10>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다')': /session/b4cc67b39ff6276b0d1bf46eca9129e7/element
+2025-06-05 22:56:48,057 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000274EC7B7010>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다')': /session/ebfe2f60cf21ba20595c3daf103926a8/element
+2025-06-05 22:56:48,057 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000274EC7BC450>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다')': /session/62a37434c2c7fe8901c8f5496342ee01/element
+2025-06-05 22:56:48,134 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000274EC7C7E10>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다')': /session/0e743775d87a5610c300d19f6b0de7b3/element

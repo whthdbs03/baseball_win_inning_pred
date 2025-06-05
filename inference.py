@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import argparse
 from db_utils import save_live_win_prediction
+import math
 
 def inference_prob(model, game_df, feature_cols, home_win_pred):
     """
@@ -53,6 +54,23 @@ def setmodel():
     model.eval()
     return model
 
+def adjust_win_prob(P, score_diff, inning, total_innings=9, k=0.8):
+    """
+    P: 모델이 예측한 홈팀 승률 (0~1)
+    score_diff: 홈 - 어웨이 점수차
+    inning: 현재 이닝 (1~9)
+    total_innings: 총 이닝 수 (기본은 9회)
+    k: 점수차 반영 강도 (0.5~1 사이가 적당)
+    """
+    # 회차 진행에 따라 점수차 영향력 증가
+    inning_weight = inning / total_innings
+    # 점수차 기반 보정값 (시그모이드)
+    score_factor = 1 / (1 + math.exp(-k * score_diff * inning_weight))
+    # 예측값 보정
+    adjusted = P * score_factor + (1 - P) * (1 - score_factor)
+    return adjusted
+
+
 def inference(inning, game_id, home_win_pred):
     realtimedf = get_realtimelog_df(inning, game_id)
     # inning = 1
@@ -74,8 +92,10 @@ def inference(inning, game_id, home_win_pred):
     print("모델 세팅완")
     prob, pred = inference_prob(model, realtimedf, feature_cols, home_win_pred)
     print(f"현재 시점 예측 → 확률: {prob:.4f}, 예측: {'승리' if pred >=0.5 else '패배'}")
-    
-    save_live_win_prediction(game_id=game_id, inning=inning, win_prob=prob, 
+
+    whth_prob = adjust_win_prob(prob,realtimedf['score_diff'].iloc[-1], inning)
+    print(whth_prob)
+    save_live_win_prediction(game_id=game_id, inning=inning, win_prob=whth_prob, 
                              home_accum_score=realtimedf['home_score'].iloc[-1],
                              away_accum_score=realtimedf['away_score'].iloc[-1])
     print(f"🏠 홈 최종 점수: {realtimedf['home_score'].iloc[-1]}")
