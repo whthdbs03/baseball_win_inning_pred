@@ -13,31 +13,62 @@ from inference import inference
 prev_inning = None
 
 # ✅ 현재까지 종료된 이닝 번호를 감지하는 함수
+# def get_current_inning(game_id: str) -> int:
+    # driver =  get_driver() #webdriver.Chrome()
+    # url = f"https://www.koreabaseball.com/Game/LiveText.aspx?leagueId=1&seriesId=0&gameId={game_id}0&gyear=2025"
+    # driver.get(url)
+
+    # wait = WebDriverWait(driver, 10)
+    # wait.until(EC.presence_of_element_located((By.ID, "tblScoreBoard2")))
+
+    # max_inning = 12
+    # inning_done = 0
+
+    # try:
+    #     for i in range(1, max_inning + 1):
+    #         away_td = driver.find_element(By.ID, f"rptScoreBoard2_tdInn{i}_0")  # 어웨이팀
+    #         home_td = driver.find_element(By.ID, f"rptScoreBoard2_tdInn{i}_1")  # 홈팀
+    #         if '-' in (away_td.text.strip(), home_td.text.strip()):
+    #             break
+    #         inning_done = i
+    # except Exception as e:
+    #     print(f"⚠️ 이닝 정보 파싱 중 오류: {e}")
+    #     driver.quit()
+    #     return None 
+
+    # driver.quit()
+    # return inning_done
 def get_current_inning(game_id: str) -> int:
-    driver =  get_driver() #webdriver.Chrome()
-    url = f"https://www.koreabaseball.com/Game/LiveText.aspx?leagueId=1&seriesId=0&gameId={game_id}0&gyear=2025"
-    driver.get(url)
-
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.ID, "tblScoreBoard2")))
-
-    max_inning = 12
-    inning_done = 0
-
+    print("현재의 이닝은?")
+    driver = get_driver()
     try:
+        url = f"https://www.koreabaseball.com/Game/LiveText.aspx?leagueId=1&seriesId=0&gameId={game_id}0&gyear=2025"
+        driver.get(url)
+
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.ID, "tblScoreBoard2")))
+
+        max_inning = 12
+        inning_done = 0
+
         for i in range(1, max_inning + 1):
-            away_td = driver.find_element(By.ID, f"rptScoreBoard2_tdInn{i}_0")  # 어웨이팀
-            home_td = driver.find_element(By.ID, f"rptScoreBoard2_tdInn{i}_1")  # 홈팀
-            if '-' in (away_td.text.strip(), home_td.text.strip()):
+            away_td = driver.find_element(By.ID, f"rptScoreBoard2_tdInn{i}_0")
+            home_td = driver.find_element(By.ID, f"rptScoreBoard2_tdInn{i}_1")
+            away = away_td.text.strip()
+            home = home_td.text.strip()
+
+            if not away or not home or '-' in (away, home):
                 break
             inning_done = i
+
+        return inning_done
+
     except Exception as e:
         print(f"⚠️ 이닝 정보 파싱 중 오류: {e}")
-        driver.quit()
-        return None 
+        return None
 
-    driver.quit()
-    return inning_done
+    finally:
+        driver.quit()
 
 # ✅ 추론 실행 함수
 def run_inference(inning: int, game_id: str, home_win_pred: float):
@@ -46,10 +77,28 @@ def run_inference(inning: int, game_id: str, home_win_pred: float):
     inference(inning=inning, game_id=game_id, home_win_pred=home_win_pred)
 
 # ✅ 주기적 감시 함수
+# def run_inference_if_inning_finished(game_id: str, home_win_pred: float):
+#     global prev_inning
+#     try:
+#         current_inning = get_current_inning(game_id)
+
+#         if current_inning is None:
+#             print("⚠️ 이닝 정보를 얻지 못함. 이전 값 유지.")
+#             return
+
+#         if prev_inning is not None and current_inning > prev_inning:
+#             run_inference(prev_inning, game_id, home_win_pred)
+
+#         prev_inning = current_inning
+#         print(f"⌛ 현재 종료된 이닝: {current_inning}회")
+
+#     except Exception as e:
+#         print(f"❌ 예외 발생: {e}")
 def run_inference_if_inning_finished(game_id: str, home_win_pred: float):
     global prev_inning
     try:
         current_inning = get_current_inning(game_id)
+        print(f"[디버깅] prev: {prev_inning}, current: {current_inning}")
 
         if current_inning is None:
             print("⚠️ 이닝 정보를 얻지 못함. 이전 값 유지.")
@@ -63,6 +112,7 @@ def run_inference_if_inning_finished(game_id: str, home_win_pred: float):
 
     except Exception as e:
         print(f"❌ 예외 발생: {e}")
+
 
 # ✅ 스케줄러 시작 함수
 def start_scheduler(game_id: str, home_win_pred: float):
